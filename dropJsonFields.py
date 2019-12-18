@@ -16,4 +16,4 @@ with open(filePath) as json_file:
 
 print(dataMod)
 with open(filePath + "_modified", 'w', encoding = 'utf8') as outfile:
-    json.dump(data, outfile, ensure_ascii=False)
+    json.dump(data, outfile, ensure_ascii = False)
