@@ -1,4 +1,6 @@
 ﻿# -*- coding: utf-8 -*-
+#Gestión de usuarios de Hue: asignación de usuario a grupos y de permisos a grupos
+#Gustavo Tejerina
 
 import os
 import sys
