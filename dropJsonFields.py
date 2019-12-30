@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+#Procesado de un fichero JSON para eliminar atributos
+#Gustavo Tejerina
+
 import json
 
 #Ruta absoluta del fichero JSON de entrada
