@@ -29,6 +29,7 @@ passCDH = raw_input("Introducir la password del usuario " + userCDH + ": ")
 #Obtención y recorrido del JSON con la configuración y output de los parámetros
 json = execCurl("/cm/deployment")
 for n1 in json["clusters"]:
+	print "\nCluster: " + n1["displayName"]
 	for n2 in n1["services"]:
 		data = 0
 		print n2["displayName"]
