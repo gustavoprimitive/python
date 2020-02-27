@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#Obtenci贸n de los valores de par谩metros de BB.DD. y SSL de Cloudera a partir de llamada a la API
 
 import os
 import sys
@@ -10,7 +11,7 @@ urlBase = "http://localhost:7180"
 #Version de la API
 apiRelease = "v13"
 
-#Petici髇 a API a trav閟 de curl, s髄o GET
+#Petici贸n a API a trav茅s de curl, s贸lo GET
 def execCurl(url):
 	headers = " -H 'Content-type: application/json' -H 'Accept-Charset: UTF-8'"
 	cmdGet = "curl -k -sS -X GET -u " + "'" + userCDH + ":" + passCDH + "' " + urlBase + "/api/" + apiRelease + url + " 2>/dev/null"
@@ -25,7 +26,7 @@ def execCurl(url):
 userCDH = raw_input("Introducir el nombre de usuario administrador de Cloudera Manager: ")
 passCDH = raw_input("Introducir la password del usuario " + userCDH + ": ")
 
-#Obtenci髇 y recorrido del JSON con la configuraci髇 y output de los par醡etros
+#Obtenci贸n y recorrido del JSON con la configuraci贸n y output de los par谩metros
 json = execCurl("/cm/deployment")
 #Servicios del cluster exceptuando CMS
 for n1 in json["clusters"]:
