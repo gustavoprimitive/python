@@ -6,7 +6,7 @@ import sys
 import json
 
 #URL base
-urlBase = "http://localhost:7180"
+urlBase = "https://localhost:7183"
 
 #Version de la API
 apiRelease = "v13"
@@ -33,11 +33,11 @@ for n1 in json["clusters"]:
 	print "\nCluster: " + n1["displayName"]
 	for n2 in n1["services"]:
 		dataDB = dataSSL = 0
-		print n2["displayName"]
+		print "Servicio: " + n2["displayName"]
 		for n3 in n2["config"]["items"]:
 			if "database" in n3["name"]:
 				if dataDB == 0:
-					print "\t- Database" 
+					print "\t- Database"
 				dataDB += 1
 				print "\t\t" + n3["name"] + ": " + n3["value"]
 			if "ssl" in n3["name"]:
@@ -51,7 +51,7 @@ for n1 in json["clusters"]:
 					if dataDB == 0:
 						 print "\t- Database"
 					dataDB += 1
-					print "\t\t" + n5["name"] + ": " + n5["value"]	
+					print "\t\t" + n5["name"] + ": " + n5["value"]
 				if "ssl" in n5["name"]:
 					if dataSSL == 0:
 						print "\t- SSL"
@@ -62,7 +62,7 @@ for n1 in json["clusters"]:
 #Servicio CMS
 for n1 in json["managementService"]["roleConfigGroups"]:
 	dataDB = 0
-	print n1["displayName"]
+	print "Rol: " + n1["displayName"]
 	for n2 in n1["config"]["items"]:
 		if "database" in n2["name"]:
 			if dataDB == 0:
@@ -71,10 +71,20 @@ for n1 in json["managementService"]["roleConfigGroups"]:
 			print "\t\t" + n2["name"] + ": " + n2["value"]
 	if dataDB == 0:
 		print "\tN/A"
+print "Servicio: " + json["managementService"]["name"]
+if len(json["managementService"]["config"]["items"]) > 0:
+	print "\t- SSL"
+for n1 in json["managementService"]["config"]["items"]:
+	dataSSL = 0
+	if "ssl" in n1["name"]:
+		dataSSL += 1
+		print "\t\t" + n1["name"] + ": " + n1["value"]
+if dataSSL == 0:
+	print "\tN/A"
 #Roles de CMS
 for n1 in json["managementService"]["roles"]:
 	dataSSL = 0
-	print n1["name"]
+	print "Rol: " + n1["name"]
 	for n2 in n1["config"]["items"]:
 		if "ssl" in n2["name"]:
 			if dataSSL == 0:
