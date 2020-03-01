@@ -3,6 +3,7 @@
 import json
 import os
 import sys
+import pandas as pd
 
 #Iteración de claves y objetos y generación de diccionario path/valor
 def flattenJSON(json):
@@ -17,7 +18,7 @@ def flattenJSON(json):
         elif type(json) is list:
             i = 0
             for key in json:
-                # Llamada recursiva en la que "json" se corresponde con el contenido de la posición "i" del array
+                #Llamada recursiva en la que "json" se corresponde con el contenido de la posición "i" del array
                 flatten(key, name + str(i) + '/')
                 i += 1
         else:
@@ -39,3 +40,8 @@ print("")
 for key, value in flattenJSON(jsonData).items():
     print(key + ": " + str(value))
 
+#Generacióon de dataframe con los datos del dict: cada nivel del path es una columna
+df = pd.DataFrame(flattenJSON(jsonData).items(), columns = ['Path', 'Value'])
+dfValue = df['Value']
+df = pd.DataFrame(df.Path.str.split('/', expand = True))
+df["Value"] = dfValue
