@@ -20,7 +20,7 @@ while 1 == 1:
     if counter == 10:
         #pydirectinput.click(button='right')
         #pydirectinput.press('esc')
-        opcion = random.choice(action)
+        opcion = random.choice(actions)
         pydirectinput.press(opcion)
         counter = 0
     time.sleep(random.randrange(1, 10))
